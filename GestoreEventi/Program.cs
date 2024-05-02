@@ -19,13 +19,19 @@ namespace GestoreEventi
                 }
 
 
-
-                Console.Write("Inserisci la data dell'evento ( gg/mm/yyyy ): ");
+                Console.Write("Inserisci la data dell'evento (gg/mm/yyyy): ");
                 string DataDAData = Console.ReadLine();
-                DateTime Data;
-                if (DateTime.TryParse(DataDAData, out Data)) { }
-                Data.ToString("dd/MM/yyyy");
-                
+                DateTime data;
+
+                if (DateTime.TryParseExact(DataDAData, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out data))
+                {
+                    Console.WriteLine("Data inserita correttamente: " + data.ToString("dd/MM/yyyy"));
+                }
+                else
+                {
+                    Console.WriteLine("Formato data non valido. Assicurati di inserire la data nel formato corretto (gg/mm/yyyy).");
+                }
+
 
 
                 Console.Write("Inserisci il numero dei posti totali : ");
