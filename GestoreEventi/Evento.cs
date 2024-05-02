@@ -88,6 +88,10 @@ namespace GestoreEventi
 
         public void DisdiciPosti(int postiDisdetti)
         {
+            if (postiDisdetti < 0 )
+            {
+                throw new Exception("non si possono disdire 0 posti");
+            }
             
             if  (postiDisdetti > Postiprenotati)
             {
@@ -95,10 +99,7 @@ namespace GestoreEventi
             }
 
             Postiprenotati -= postiDisdetti;
-            if ()
-            {
 
-            }
 
         }
 
