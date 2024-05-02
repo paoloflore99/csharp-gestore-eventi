@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace GestoreEventi
         {
             List<Evento> eventiInData = new List<Evento>();
 
-            foreach (var evento in eventi)
+            foreach (Evento evento in eventi)
             {
                 if (evento.Data.Date == data.Date)
                 {
@@ -38,6 +39,24 @@ namespace GestoreEventi
             }
 
             return eventiInData;
+        }
+
+        public void StampaEventi()
+        {
+            foreach (Evento evento in eventi)
+            {
+                Console.WriteLine(evento);
+            }
+        }
+
+        public int NumeroDiEventi()
+        {
+            return eventi.Count;
+        }
+
+        public void SvuolaLista()
+        {
+            eventi.Clear();
         }
 
 
