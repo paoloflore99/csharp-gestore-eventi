@@ -8,5 +8,8 @@ namespace GestoreEventi
 {
     internal class ProgrammaEventi
     {
+        string Titolo;
+
+        List<Evento> eventi;
     }
 }

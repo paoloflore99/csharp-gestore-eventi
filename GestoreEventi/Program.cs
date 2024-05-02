@@ -1,4 +1,7 @@
-﻿namespace GestoreEventi
+﻿using System.Globalization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace GestoreEventi
 {
     internal class Program
     {
@@ -22,11 +25,10 @@
                 DateTime Data;
                 if (DateTime.TryParse(DataDAData, out Data)) { }
                 Data.ToString("dd/MM/yyyy");
-
+                
 
 
                 Console.Write("Inserisci il numero dei posti totali : ");
-                //int CapacitaMassima = Convert.ToInt32(Console.ReadLine());
                 int CapacitaMassima;
                 if (!int.TryParse(Console.ReadLine(), out CapacitaMassima))
                 {
@@ -44,7 +46,10 @@
                 Console.Write("Quanti posti desideri prenotare :  ");
                 int Postiprenotati = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine(Data);
+
+                
+                //Console.WriteLine(Data);
+                //datetimeparse
                 Console.WriteLine();
 
 
@@ -55,39 +60,45 @@
 
                 Console.WriteLine();
 
-
-
-                Console.Write("Vuoi disdire delle posti (SI / NO) : ");
-                //DisdiciPosti(int postiDisdetti)
-                string SINO = Console.ReadLine();
-
-                if (SINO == "si")
+                string SINO;
+                do
                 {
-                    Console.Write("quanti posti vuoi disdire : ");
-                    int PostipostiDisdetti = int.Parse(Console.ReadLine());
-                    if (PostipostiDisdetti > Postiprenotati)
+                    Console.Write("Vuoi disdire delle posti (SI / NO) : ");
+                     SINO = Console.ReadLine();
+                    if (SINO == "si")
                     {
-                        
-                        Console.WriteLine($"I posti disdetti devo essere meno di : {Postiprenotati}");
+
+                        Console.Write("quanti posti vuoi disdire : ");
+                        int PostipostiDisdetti = int.Parse(Console.ReadLine());
+                        if (PostipostiDisdetti > Postiprenotati)
+                        {
+
+                            Console.WriteLine($"I posti disdetti devo essere meno di : {Postiprenotati}");
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                            int calcoloRifatto = Postiprenotati - PostipostiDisdetti;
+                            Console.WriteLine($"adesso i prenotati sono  : {calcoloRifatto}");
+                            int NuovoRisultato = CapacitaMassima - calcoloRifatto;
+                            Console.WriteLine($"e i posti liberi sono : {NuovoRisultato}");
+                            Console.WriteLine();
+                        }
+
                     }
-                    Console.WriteLine();
-                    int calcoloRifatto = Postiprenotati - PostipostiDisdetti  ;
-                    Console.WriteLine($"adesso i prenotati sono  : {calcoloRifatto}");
-                    int NuovoRisultato = CapacitaMassima - calcoloRifatto;
-                    Console.WriteLine($"e i posti liberi sono : {NuovoRisultato}") ;
-                    Console.WriteLine();
-                } 
-                else if (SINO == "no")
-                {
-                    Console.WriteLine("OK va bene");
-                }
-                else
-                {
-                    Console.WriteLine("inserire si o no");
-                }
+                    else if (SINO != "no" && SINO != "si")
+                    {
+                        Console.WriteLine("Inserire SI o NO.");
+                    }
+                } while (SINO == "si");
+                   
+
+                        
+                    
 
 
 
+                
 
             }
             catch (Exception ex)
@@ -98,3 +109,5 @@
         }
     }
 }
+//Data = DateTime.ParseExact("31/12/2024", "dd/MM/yyyy", null);
+//DateTime.TryParseExact("31/12/2024", "dd/MM/yyyy", new CultureInfo("it-IT"), DateTimeStyles.None, out DateTime result);
