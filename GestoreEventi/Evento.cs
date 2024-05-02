@@ -61,5 +61,10 @@ namespace GestoreEventi
             this.Postiprenotati = Postiprenotati;
             Postiprenotati = 0;
         }
+
+        public override string ToString()
+        {
+            return $"{Titolo} , {Data} , {CapacitaMassima} , { Postiprenotati}";
+        }
     }
 }
