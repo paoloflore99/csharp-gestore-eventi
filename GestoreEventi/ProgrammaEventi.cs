@@ -58,8 +58,15 @@ namespace GestoreEventi
         {
             eventi.Clear();
         }
+        public void ListaTitoli()
+        {
+            foreach(Evento evento in eventi)
+            {
 
+            }
+            string listaMetodo = $"{Titolo}";
 
+        }
 
     }
 }
