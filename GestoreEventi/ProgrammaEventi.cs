@@ -8,8 +8,17 @@ namespace GestoreEventi
 {
     internal class ProgrammaEventi
     {
-        string Titolo;
+        public string Titolo;
 
-        List<Evento> eventi;
+        private List<Evento> Eventi;
+
+        public ProgrammaEventi(string titolo)
+        {
+            this.Titolo = titolo;
+            Eventi = new List<Evento>();
+        }
+
+
+
     }
 }

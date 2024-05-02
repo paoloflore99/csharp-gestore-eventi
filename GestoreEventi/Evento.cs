@@ -101,7 +101,6 @@ namespace GestoreEventi
 
             Postiprenotati -= postiDisdetti;
 
-
         }
 
         public override string ToString()
