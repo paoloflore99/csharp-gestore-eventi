@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GestoreEventi
 {
@@ -55,57 +56,70 @@ namespace GestoreEventi
             }
         }
 
-        public Evento(string Titolo , DateTime Data , int CapacitaMassima  )
+        public Evento(string Titolo , DateTime Data , int CapacitaMassima , int Postiprenotati)
         {
             this.Titolo = Titolo;
             this.Data = Data;
             //Data.ToString("dd/MM/yyyy");
             this.CapacitaMassima = CapacitaMassima ;
-            this.Postiprenotati = 0;
+            this.Postiprenotati = Postiprenotati;
         }
 
 
-        public void PrenotaPosti()
+        public void PrenotaPosti(string Titolo , DateTime data )
             
         {
-            
-            if (Data < DateTime.Today)
-            {
-                throw new Exception($"prenotare per una data dopo il {DateTime.Today}");
-            }
 
-            int PostiDisponibbili = CapacitaMassima - Postiprenotati ;
 
-            if (PostiDisponibbili <= 0 )
-            {
-                throw new Exception("Mi dispiace , ma non ci sono piu posti disponibbili per questo evento");
-            }
 
-            if (CapacitaMassima > Postiprenotati)
-            {
-                throw new Exception($"la capacita massima e di {CapacitaMassima} diminuire i prenotati al massimo di {CapacitaMassima}");
-            }
+
         }
 
-        public void DisdiciPosti(int postiDisdetti)
+        public void DisdiciPosti(int Postiprenotati , int CapacitaMassima)
         {
-            if (postiDisdetti < 0 )
-            {
-                throw new Exception("non si possono disdire 0 posti");
-            }
-            
-            if  (postiDisdetti > Postiprenotati)
-            {
-                throw new Exception("non puo disdire sotto lo 0 ");
-            }
 
-            Postiprenotati -= postiDisdetti;
+            string SINO;
+            do
+            {
+                Console.Write("Vuoi disdire delle posti (SI / NO) : ");
+                SINO = Console.ReadLine();
+                if (SINO == "si")
+                {
+
+                    Console.Write("quanti posti vuoi disdire : ");
+                    int PostipostiDisdetti = int.Parse(Console.ReadLine());
+                    if (PostipostiDisdetti > Postiprenotati)
+                    {
+
+                        Console.WriteLine($"I posti disdetti devo essere meno di : {Postiprenotati}");
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        int calcoloRifatto = Postiprenotati - PostipostiDisdetti;
+                        Console.WriteLine($"adesso i prenotati sono  : {calcoloRifatto}");
+                        int NuovoRisultato = CapacitaMassima - calcoloRifatto;
+                        Console.WriteLine($"e i posti liberi sono : {NuovoRisultato}");
+                        Console.WriteLine();
+                    }
+
+                }
+                else if (SINO != "no" && SINO != "si")
+                {
+                    Console.WriteLine("Inserire SI o NO.");
+                }
+            } while (SINO == "si");
 
         }
 
         public override string ToString()
         {
             return $"{Titolo}-{Data}";
+        }
+
+        internal static void DisdiciPosti(object numeroDiPostiDaDisdire)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-
+using GestoreEventi;
 namespace GestoreEventi
 {
     internal class Program
@@ -12,9 +12,9 @@ namespace GestoreEventi
             try
             {
 
-                
                 Console.Write($"Inserisci il nome dell'evento : ");
                 string Titolo = Console.ReadLine();
+
                 if (string.IsNullOrEmpty(Titolo))
                 {
                     throw new Exception("nome evento obligatorio");
@@ -33,14 +33,14 @@ namespace GestoreEventi
                 {
                     Console.WriteLine("Formato data non valido. Assicurati di inserire la data nel formato corretto (gg/mm/yyyy).");
                 }
-
+                
 
 
                 Console.Write("Inserisci il numero dei posti totali : ");
                 int CapacitaMassima;
                 if (!int.TryParse(Console.ReadLine(), out CapacitaMassima))
                 {
-                    //throw new Exception("inserisci numero intero");
+                    
                     Console.WriteLine("inserisci numero intero");
                 }
 
@@ -61,61 +61,31 @@ namespace GestoreEventi
 
 
                 Console.WriteLine($"numero di posti prenotati - {Postiprenotati}");
-                int calcolo = CapacitaMassima - Postiprenotati;
+                int calcolo =  - Postiprenotati;
                 Console.WriteLine($"numero di posti disponibbili - {calcolo}");
 
                 Console.WriteLine();
-
-                string SINO;
-                do
-                {
-                    Console.Write("Vuoi disdire delle posti (SI / NO) : ");
-                     SINO = Console.ReadLine();
-                    if (SINO == "si")
-                    {
-
-                        Console.Write("quanti posti vuoi disdire : ");
-                        int PostipostiDisdetti = int.Parse(Console.ReadLine());
-                        if (PostipostiDisdetti > Postiprenotati)
-                        {
-
-                            Console.WriteLine($"I posti disdetti devo essere meno di : {Postiprenotati}");
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                            int calcoloRifatto = Postiprenotati - PostipostiDisdetti;
-                            Console.WriteLine($"adesso i prenotati sono  : {calcoloRifatto}");
-                            int NuovoRisultato = CapacitaMassima - calcoloRifatto;
-                            Console.WriteLine($"e i posti liberi sono : {NuovoRisultato}");
-                            Console.WriteLine();
-                        }
-
-                    }
-                    else if (SINO != "no" && SINO != "si")
-                    {
-                        Console.WriteLine("Inserire SI o NO.");
-                    }
-                } while (SINO == "si");
+                
+                Evento evento = new Evento(Titolo, data, CapacitaMassima, Postiprenotati);
+                evento.DisdiciPosti(Postiprenotati, CapacitaMassima);
 
 
+                //Evento.DisdiciPosti(numeroDiPostiDaDisdire);
                 //ninte
 
                 ProgrammaEventi programmaEventi = new ProgrammaEventi(Titolo);
 
                 List<Evento> eventiInData = programmaEventi.EventiInData(data); ;
-                foreach (Evento evento in eventiInData)
+                foreach (Evento evento2 in eventiInData)
                 {
                     Console.WriteLine($"Titolo - {Titolo} :");
-                    Console.WriteLine($"Data - {evento.Data}");
+                    Console.WriteLine($"Data - {evento2.Data}");
                     Console.WriteLine();
                 }
 
                 programmaEventi.StampaEventi();
-
-
                 programmaEventi.SvuolaLista();
-
+                
 
             }
             catch (Exception ex)

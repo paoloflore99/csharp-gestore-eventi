@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GestoreEventi
 {
-    internal class ProgrammaEventi
+    public class ProgrammaEventi 
     {
         public string Titolo;
 
@@ -32,7 +32,7 @@ namespace GestoreEventi
 
             foreach (Evento evento in eventi)
             {
-                if (evento.Data.Date == data.Date)
+                if (evento.Data == data.Date)
                 {
                     eventiInData.Add(evento);
                 }
@@ -62,6 +62,10 @@ namespace GestoreEventi
             {
                 eventi.Clear();
                 Console.WriteLine($"tutti ggli eventi sono stati cancellati ");
+            }
+            else
+            {
+                Console.WriteLine($"nessun evento cancellato {Titolo}");
             }
         }
         public void ListaTitoli()
