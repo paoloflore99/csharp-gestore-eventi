@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,15 +64,15 @@ namespace GestoreEventi
             Postiprenotati = 0;
         }
 
-        public override string ToString()
-        {
-            return $"{Titolo}-{Data}";
-        }
+
         public void PrenotaPosti()
+            
         {
-            if (Data < DateTime.Today  )
+            DateTime dataOggi = new(2024/05/02);
+
+            if (Data < dataOggi)
             {
-                throw new Exception($"prenotare per una data dopo il {DateTime.Today}");
+                throw new Exception($"prenotare per una data dopo il {dataOggi}");
             }
 
             int PostiDisponibbili = CapacitaMassima - Postiprenotati ;
@@ -83,10 +84,26 @@ namespace GestoreEventi
 
             if (CapacitaMassima > Postiprenotati)
             {
-                throw new Exception($"la capacita massima e di {CapacitaMassima} diminuire i prenotati al massimo di {CapacitaMassima} ");
+                throw new Exception($"la capacita massima e di {CapacitaMassima} diminuire i prenotati al massimo di {CapacitaMassima}");
             }
         }
 
-        public void DisdiciPosti() { }
+        public void DisdiciPosti(int postiDisdetti)
+        {
+            
+            //2. DisdiciPosti: riduce del i posti prenotati del numero di posti indicati come 
+            //parametro.Se l’evento è già passato o non ci sono i posti da disdire
+            //sufficienti, deve sollevare un’eccezione
+            if (Postiprenotati)
+            {
+                throw new Exception();
+            }
+
+        }
+
+        public override string ToString()
+        {
+            return $"{Titolo}-{Data}";
+        }
     }
 }
