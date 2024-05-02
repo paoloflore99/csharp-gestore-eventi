@@ -35,7 +35,7 @@ namespace GestoreEventi
             get {  return CapacitaMassima; }
             private set
             {
-            if ( CapacitaMassima < 0 )
+            if (value < 0 )
                 {
                     throw new Exception("la capacita massima deve essere positiva ");
                 }
@@ -46,7 +46,7 @@ namespace GestoreEventi
             get { return Postiprenotati; }
             private set 
             {
-                if (Postiprenotati < 0)
+                if (value < 0)
                 {
                     throw new ArgumentException("i posti prenotati devono essere positivi ");
                 }
@@ -57,6 +57,7 @@ namespace GestoreEventi
         {
             this.Titolo = Titolo;
             this.Data = Data;
+            Data.ToString("dd/MM/yyyy");
             this.CapacitaMassima = CapacitaMassima ;
             this.Postiprenotati = Postiprenotati;
             Postiprenotati = 0;
@@ -64,7 +65,28 @@ namespace GestoreEventi
 
         public override string ToString()
         {
-            return $"{Titolo} , {Data} , {CapacitaMassima} , { Postiprenotati}";
+            return $"{Titolo}-{Data}";
         }
+        public void PrenotaPosti()
+        {
+            if (Data < DateTime.Today  )
+            {
+                throw new Exception($"prenotare per una data dopo il {DateTime.Today}");
+            }
+
+            int PostiDisponibbili = CapacitaMassima - Postiprenotati ;
+
+            if (PostiDisponibbili <= 0 )
+            {
+                throw new Exception("Mi dispiace , ma non ci sono piu posti disponibbili per questo evento");
+            }
+
+            if (CapacitaMassima > Postiprenotati)
+            {
+                throw new Exception($"la capacita massima e di {CapacitaMassima} diminuire i prenotati al massimo di {CapacitaMassima} ");
+            }
+        }
+
+        public void DisdiciPosti() { }
     }
 }
