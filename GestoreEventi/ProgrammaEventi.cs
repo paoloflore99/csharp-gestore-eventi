@@ -56,7 +56,13 @@ namespace GestoreEventi
 
         public void SvuolaLista()
         {
-            eventi.Clear();
+            Console.WriteLine("cancellare tutti ggli eventi si : no ");
+            string cancella = Console.ReadLine();
+            if (cancella == "si")
+            {
+                eventi.Clear();
+                Console.WriteLine($"tutti ggli eventi sono stati cancellati ");
+            }
         }
         public void ListaTitoli()
         {

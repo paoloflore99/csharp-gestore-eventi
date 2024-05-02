@@ -8,9 +8,11 @@ namespace GestoreEventi
         static void Main(string[] args)
 
         {
-
+            
             try
             {
+
+                
                 Console.Write($"Inserisci il nome dell'evento : ");
                 string Titolo = Console.ReadLine();
                 if (string.IsNullOrEmpty(Titolo))
@@ -54,8 +56,6 @@ namespace GestoreEventi
 
 
                 
-                //Console.WriteLine(Data);
-                //datetimeparse
                 Console.WriteLine();
 
 
@@ -97,14 +97,25 @@ namespace GestoreEventi
                         Console.WriteLine("Inserire SI o NO.");
                     }
                 } while (SINO == "si");
-                   
-
-                        
-                    
 
 
+                //ninte
 
-                
+                ProgrammaEventi programmaEventi = new ProgrammaEventi(Titolo);
+
+                List<Evento> eventiInData = programmaEventi.EventiInData(data); ;
+                foreach (Evento evento in eventiInData)
+                {
+                    Console.WriteLine($"Titolo - {Titolo} :");
+                    Console.WriteLine($"Data - {evento.Data}");
+                    Console.WriteLine();
+                }
+
+                programmaEventi.StampaEventi();
+
+
+                programmaEventi.SvuolaLista();
+
 
             }
             catch (Exception ex)
