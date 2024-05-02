@@ -27,7 +27,7 @@ namespace GestoreEventi
             {
                 if (value < DateTime.Today)
                 {
-                    throw new ArgumentException("la data deve partire dal 2024/05/02 e non prima");
+                    throw new ArgumentException($"la data deve partire dal {DateTime.Today} e non prima");
                 }
             }
         }
@@ -54,25 +54,23 @@ namespace GestoreEventi
             }
         }
 
-        public Evento(string Titolo , DateTime Data , int CapacitaMassima , int Postiprenotati)
+        public Evento(string Titolo , DateTime Data , int CapacitaMassima  )
         {
             this.Titolo = Titolo;
             this.Data = Data;
-            Data.ToString("dd/MM/yyyy");
+            //Data.ToString("dd/MM/yyyy");
             this.CapacitaMassima = CapacitaMassima ;
-            this.Postiprenotati = Postiprenotati;
-            Postiprenotati = 0;
+            this.Postiprenotati = 0;
         }
 
 
         public void PrenotaPosti()
             
         {
-            DateTime dataOggi = new(2024/05/02);
-
-            if (Data < dataOggi)
+            
+            if (Data < DateTime.Today)
             {
-                throw new Exception($"prenotare per una data dopo il {dataOggi}");
+                throw new Exception($"prenotare per una data dopo il {DateTime.Today}");
             }
 
             int PostiDisponibbili = CapacitaMassima - Postiprenotati ;
@@ -90,15 +88,16 @@ namespace GestoreEventi
 
         public void DisdiciPosti(int postiDisdetti)
         {
-            int riduzzionePosti =  postiDisdetti - Postiprenotati ;
+            
             if  (postiDisdetti > Postiprenotati)
             {
                 throw new Exception("non puo disdire sotto lo 0 ");
             }
 
-            if (Postiprenotati <= 0)
+            Postiprenotati -= postiDisdetti;
+            if ()
             {
-                throw new Exception("non ci sono abbastanza posti da disdire");
+
             }
 
         }
