@@ -33,7 +33,7 @@ namespace GestoreEventi
         public int CapacitaMassima
         {
             get {  return CapacitaMassima; }
-            set
+            private set
             {
             if ( CapacitaMassima < 0 )
                 {
@@ -44,7 +44,7 @@ namespace GestoreEventi
         public int Postiprenotati
         {
             get { return Postiprenotati; }
-            set
+            private set 
             {
                 if (Postiprenotati < 0)
                 {
