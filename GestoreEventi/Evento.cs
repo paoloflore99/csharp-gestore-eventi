@@ -90,13 +90,15 @@ namespace GestoreEventi
 
         public void DisdiciPosti(int postiDisdetti)
         {
-            
-            //2. DisdiciPosti: riduce del i posti prenotati del numero di posti indicati come 
-            //parametro.Se l’evento è già passato o non ci sono i posti da disdire
-            //sufficienti, deve sollevare un’eccezione
-            if (Postiprenotati)
+            int riduzzionePosti =  postiDisdetti - Postiprenotati ;
+            if  (postiDisdetti > Postiprenotati)
             {
-                throw new Exception();
+                throw new Exception("non puo disdire sotto lo 0 ");
+            }
+
+            if (Postiprenotati <= 0)
+            {
+                throw new Exception("non ci sono abbastanza posti da disdire");
             }
 
         }
