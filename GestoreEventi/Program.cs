@@ -60,6 +60,7 @@
                 Console.Write("Vuoi disdire delle posti (SI / NO) : ");
                 //DisdiciPosti(int postiDisdetti)
                 string SINO = Console.ReadLine();
+
                 if (SINO == "si")
                 {
                     Console.Write("quanti posti vuoi disdire : ");
